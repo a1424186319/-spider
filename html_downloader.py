@@ -10,7 +10,7 @@ class HtmlDowndloader(object):
 
 
         headers = {
-            'Host':'gsp0.baidu.com',
+            'Host':'baike.baidu.com',
             'Refer':'https://baike.baidu.com',
             'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
         }
@@ -19,4 +19,5 @@ class HtmlDowndloader(object):
         if response.status_code != 200:
             raise Exception(f'请求失败,code{response.status_code}')
 
-        return response.text
+        return response.content.decode(encoding='utf-8')
+        # return response.text

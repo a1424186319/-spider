@@ -1,14 +1,17 @@
-from . import html_downloader, html_outputer, html_parser, url_manager
+from html_downloader import HtmlDowndloader
+from url_manager import UrlManager
+from html_outputer import Htmloutputer
+from html_parser import HtmlParser
 import time
 
 
 # 项目入口
 class SpiderMain():
     def __init__(self):
-        self.urls = url_manager.UrlManager()
-        self.downloader = html_downloader.HtmlDownloader()
-        self.parser = html_parser.HtmlParser()
-        self.output = html_outputer.HtmlOutputer()
+        self.urls = UrlManager()
+        self.downloader = HtmlDowndloader()
+        self.parser = HtmlParser()
+        self.outputer = Htmloutputer()
 
     def craw(self, root_url, page_amount=5, time_sleep=None):
         count = 1
@@ -27,8 +30,8 @@ class SpiderMain():
                 # xpath解析,得到需要的数据
                 new_urls, new_data = self.parser.parse(html_content)
                 # 一个词条页面上关联的a连接列表加入到url管理器中待爬取
-                self.urls.add_new_url(new_urls)
-                self.output.collect_data(new_url, new_data)
+                self.urls.add_new_urls(new_urls)
+                self.outputer.collect_data(new_url, new_data)
 
                 count += 1
                 if count > page_amount:
